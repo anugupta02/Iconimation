@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Envelope</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="snap.svg-min.js"></script>
+        <script>
+             window.onload = function () {
+                var icon = Snap.select("#icon");
+                var triangle = icon.select("#triangle");
+                var message = icon.select("#message");
+
+                function revert() {
+                    triangle.animate({
+                        points: "5,50 145,50 75,100"
+                    }, 500, mina.easeout);
+                    message.animate({
+                        y: "140"
+                    }, 500, mina.easeout);
+                }
+
+                function open() {
+                    clearTimeout(revert);
+                    triangle.animate({
+                        points: "0,50 150,50 75,0"
+                    }, 500, mina.easein, function() { setTimeout(revert, 1000); });
+                    message.animate({
+                        y: "20"
+                    }, 800, mina.easein);
+                    
+                }
+
+                icon.click(open);
+            }
+        </script>
+    </head>
+    <body>
+
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     width="150px" height="150px" viewBox="0 0 150 150" enable-background="new 0 0 150 150"
+     xml:space="preserve" style="width: 100px; height: 100px;">
+        <g fill="#FFFFFF" stroke="#FFFFFF" id="icon">
+            <polygon fill="#FFFFFF" stroke="#FFFFFF" id="triangle" points="5,50 145,50 75,100"/>
+            <rect id="message" x="30" y="140" width="90" height="150" fill="#F5F5F5" />
+            <path d="M0 50 75 105 150 50 150 150 0 150 z"
+                  fill-rule="evenodd"/>
+        </g>
+        </svg>
+
+
+    </body>
+</html>
